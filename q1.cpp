@@ -1,80 +1,87 @@
 #include <iostream>
 #include <fstream> //for CSV files
 
-using std::cout, std::endl;
+using std::cout, std::endl, std::ofstream; //don't use using namespace std VERY bad practice
 
-void dataSet1();
+int main() {
 
-int main()
-{
     // cout << "Chicken Nuggets";
+    ofstream file; //output file stream object
 
     //set seed to Ern Qi id
     srand(1211101398);
+
+    file.open("dataSet1.csv"); //Create A File for writing 
 
     cout << "Set 1 : 100 Numbers\n";
     for (int i = 1; i <= 100; i++)
     {
         int random = rand();
-        // cout << i << ": " << random << "\n";
-        cout << random << " ";
+        file << random << endl;
     }
 
-    cout << endl;
+    file.close(); //close the file
 
-    cout << "Set 2 : 1000\n";
+    file.open("dataSet2.csv");
+
+    cout << "Set 2 : 1000 Numbers\n";
     for (int i = 1; i <= 1000; i++)
     {
         int random = rand();
-        // cout << i << ": " << random << "\n";
-        cout << random << " ";
+        file << random << endl;
     }
 
-    cout << endl;
+    file.close();
 
-    cout << "Set 3 : 10000\n";
+    file.open("dataSet3.csv");
+
+    cout << "Set 3 : 10000 Numbers\n";
     for (int i = 1; i <= 10000; i++)
     {
         int random = rand();
-        // cout << i << ": " << random << "\n";
-        cout << random << " ";
+        file << random << endl;
     }
 
-    cout << endl;
+    file.close();
 
-    cout << "Set 4 : 100000\n";
-    for (int i = 1; i <= 1000; i++)
+    file.open("dataSet4.csv");
+
+    cout << "Set 4 : 100000 Numbers\n";
+    for (int i = 1; i <= 100000; i++)
     {
         int random = rand();
-        // cout << i << ": " << random << "\n";
-        cout << random << " ";
+        file << random << endl;
     }
 
-    cout << endl;
+    file.close();
 
-    cout << "Set 5 : 500000\n";
+    file.open("dataSet5.csv");
+
+    cout << "Set 5 : 500000 Numbers\n";
     for (int i = 1; i <= 500000; i++)
     {
         int random = rand();
-        // cout << i << ": " << random << "\n";
-        cout << random << " ";
+        file << random << endl;
     }
 
-    cout << endl;
+    file.close();
 
-    cout << "Set 6 : 1000000\n";
+    file.open("dataSet6.csv");
+
+    cout << "Set 6 : 1000000 Numbers\n";
     for (int i = 1; i <= 1000000; i++)
     {
         int random = rand();
-        // cout << i << ": " << random << "\n";
-        cout << random << " ";
+        file << random << endl;
     }
+
+    file.close();
     
+    // std::string freePizza[] = {"Pizza1", "Pizza2", "Pizza3"};
+
+    // std::string *pFree = freePizza;
+
+    // cout << "\n" << *pFree;
     
     return 0;
-}
-
-void dataSet1() {
-
-
 }
