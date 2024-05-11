@@ -11,7 +11,7 @@ int main() {
     //set seed to Ern Qi id
     srand(1211101398);
 
-    file.open("dataSet1.csv"); //Create A File for writing 
+    file.open("Set1.csv"); //Create A File for writing 
 
     cout << "Set 1 : 100 Numbers\n";
     for (int i = 1; i <= 100; i++)
@@ -22,7 +22,7 @@ int main() {
 
     file.close(); //close the file
 
-    file.open("dataSet2.csv");
+    file.open("Set2.csv");
 
     cout << "Set 2 : 1000 Numbers\n";
     for (int i = 1; i <= 1000; i++)
@@ -33,7 +33,7 @@ int main() {
 
     file.close();
 
-    file.open("dataSet3.csv");
+    file.open("Set3.csv");
 
     cout << "Set 3 : 10000 Numbers\n";
     for (int i = 1; i <= 10000; i++)
@@ -44,7 +44,7 @@ int main() {
 
     file.close();
 
-    file.open("dataSet4.csv");
+    file.open("Set4.csv");
 
     cout << "Set 4 : 100000 Numbers\n";
     for (int i = 1; i <= 100000; i++)
@@ -55,7 +55,7 @@ int main() {
 
     file.close();
 
-    file.open("dataSet5.csv");
+    file.open("Set5.csv");
 
     cout << "Set 5 : 500000 Numbers\n";
     for (int i = 1; i <= 500000; i++)
@@ -66,7 +66,7 @@ int main() {
 
     file.close();
 
-    file.open("dataSet6.csv");
+    file.open("Set6.csv");
 
     cout << "Set 6 : 1000000 Numbers\n";
     for (int i = 1; i <= 1000000; i++)
