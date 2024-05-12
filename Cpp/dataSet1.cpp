@@ -66,7 +66,7 @@ int main() {
 
     file.close();
 
-    file.open("Set6.csv");
+    file.open("./Set6.csv");
 
     cout << "Set 6 : 1000000 Numbers\n";
     for (int i = 1; i <= 1000000; i++)

@@ -128,13 +128,28 @@ void cyclicStarConnect(Star (&stars)[]) {
         if (i == 19) {
 
             stars[i].setConnectedStar(stars[0]);
-            Star::edgeCount++;
+            stars[i].setConnectedStar(stars[i-1]);
+            Star::edgeCount+=2;
         }
-        else {
-
+        else if (i >= 1)
+        {
             stars[i].setConnectedStar(stars[i+1]);
-            Star::edgeCount++;
+            stars[i].setConnectedStar(stars[i-1]);
+            Star::edgeCount+=2;
         }
+        else if (i == 0)
+        {
+            stars[i].setConnectedStar(stars[i+1]);
+            stars[i].setConnectedStar(stars[19]);
+            Star::edgeCount+=2;
+        }
+        
+        // else {
+
+        //     // stars[i].setConnectedStar(stars[i+1]);
+        //     // Star::edgeCount++;
+        // }
+        
         
     }
 }
@@ -144,13 +159,14 @@ void setAllStarProperties (Star (&stars)[]) {
     ofstream file;
 
     long long seedRef = 1221301874LL + 1211102289 + 1211104274;
+    string name[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T"};
 
     srand(seedRef);
 
 
     for (int i = 0; i < 20; i++)
     {
-        stars[i].setName("A");
+        stars[i].setName(name[i]);
         stars[i].setX(rand());
         stars[i].setY(rand());
         stars[i].setZ(rand());
