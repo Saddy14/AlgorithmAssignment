@@ -2,18 +2,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-public class SetOne {
+public class SetSix {
     
-    SetOne () throws IOException {
+    SetSix () throws IOException {
 
-        FileWriter writer = new FileWriter("./dataSet1.csv");
+        FileWriter writer = new FileWriter("./dataSet6.csv");
         Random random = new Random();
         // random.setSeed(1211101398); //setting the seed to get random-nums more distinct from other grp's
-        int[] seedRef = {1, 2, 1, 1, 1, 0, 1, 3, 9, 8};
+        // int[] seedRef = {1, 2, 1, 1, 1, 0, 1, 3, 9, 8};
+        int[] seedRef = {1, 2, 2, 1, 3, 0, 1, 8, 7, 4};
+
         // ArrayList<Integer> casePicker = new ArrayList<>(Arrays.asList(0,1,2) );
         System.out.println(seedRef.length);
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 1_000_000; i++) {
 
             // Collections.shuffle(casePicker);
             
