@@ -5,6 +5,9 @@ public class dataSet1 {
 
         new SetOne();
         new SetTwo();
+        new SetThree();
+        new SetFour();
+        new SetFive();
         new SetSix();
 
     }
