@@ -1,10 +1,10 @@
-import java.io.FileWriter;
+package Q1;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class Star {
 
-    private char name;
+    private int name;
     private int x;
     private int y;
     private int z;
@@ -15,10 +15,10 @@ public class Star {
     static int edgeCount;
     final static int TOTAL_EDGE = 54;
     
-    public char getName() {
+    public int getName() {
         return name;
     }
-    public void setName(char name) {
+    public void setName(int name) {
         this.name = name;
     }
     public int getX() {
@@ -73,6 +73,11 @@ public class Star {
                 + ", connectedStarsName = [" + connectedStarsName() + "]";
     }
 
+    public static void writeInFile() {
+
+
+    }
+
     String connectedStarsName() {
 
         StringBuilder connectedStarsName = new StringBuilder();
@@ -95,48 +100,71 @@ public class Star {
     
                 myStars[i].addConnectedStars(myStars[0]);
                 myStars[i].addConnectedStars(myStars[i-1]);
-                // Star::edgeCount+=2;
+                Star.edgeCount+=1;
             }
             else if (i >= 1)
             {
                 myStars[i].addConnectedStars(myStars[i+1]);
                 myStars[i].addConnectedStars(myStars[i-1]);
-                // Star::edgeCount+=2;
+                Star.edgeCount+=1;
             }
             else if (i == 0)
             {
                 myStars[i].addConnectedStars(myStars[i+1]);
                 myStars[i].addConnectedStars(myStars[19]);
-                // Star::edgeCount+=2;
+                Star.edgeCount+=1;
             }
         }
-
     }
 
-    public static void setRandomName (Star[] myStars) {
-
+    public static void connect2(Star[] myStars) {
         
+        for (int i = 0; i < 20; i++)
+        {
+
+            if (i == 19) {
+    
+                myStars[i].addConnectedStars(myStars[1]);
+                Star.edgeCount+=1;
+            }
+            else if (i == 18)
+            {
+                myStars[i].addConnectedStars(myStars[0]);
+                Star.edgeCount+=1;
+            }
+            else if (i >= 0)
+            {
+                myStars[i].addConnectedStars(myStars[i+2]);
+                Star.edgeCount+=1;
+            }
+        }
     }
 
-    public static void setStarProperties(Star[] myStars) {
+    public static void connect3(Star[] myStars) {
+        
+        for (int i = 0; i < 14; i++)
+        {   
+            myStars[i].addConnectedStars(myStars[i+3]);
+            Star.edgeCount+=1;
+        }
+    }
 
+    public static void setStarProperties(Star[] myStars) { // Set x, y, z, weight & Profit for each stars
 
         for (int i = 0; i < myStars.length; i++) {
             
             myStars[i].setX(genRandomValue());
             myStars[i].setY(genRandomValue());
             myStars[i].setZ(genRandomValue());
-            // myStars[i].setWeight(genRandomValue() % 100 + 1);
-            // myStars[i].setProfit(genRandomValue() % 99 + 1);
+            myStars[i].setWeight(genRandomWeight());
+            myStars[i].setProfit(genRandomValue());
         }
-
     }
 
-    private static int genRandomValue() {
+    private static int genRandomValue() { // Generate random value for x, y, z & Profit Only
 
         // Ern Qi 1221301874 + Teng Hui 1211102289 + Xin Thong 1211104274 = 3633307961
         int[] seedRef = {0, 1, 3, 6, 7, 9};
-        // int[] seedRef = {3, 6, 0, 7, 9, 6, 1, 3};
 
         Random random = new Random();
 
@@ -149,8 +177,16 @@ public class Star {
             default:
                 return 0;
         }
+    }
 
+    private static int genRandomWeight() { // Generate random value for Weight Only
 
+        // Ern Qi 1221301874 + Teng Hui 1211102289 + Xin Thong 1211104274 = 3633307961
+        int[] seedRef = {1, 3, 6, 7, 9}; // no '0' to keep the total weight >= 800 
+
+        Random random = new Random();
+
+        return generateT(random, seedRef);
     }
 
     private static int generateT(Random random, int[] seedRef) { //for 10s
@@ -171,8 +207,9 @@ public class Star {
 
         // System.out.println("temp+++ " + temp + temp2 + temp3 );
 
-        return Integer.parseInt(String.valueOf(temp) + String.valueOf(temp2) + String.valueOf(temp3));
+        return Integer.parseInt(String.valueOf(temp) + String.valueOf(temp2) + String.valueOf(temp3)); //
     }
+
 }
 
 

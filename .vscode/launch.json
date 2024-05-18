@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "dataSet1",
+            "request": "launch",
+            "mainClass": "Q1.dataSet1",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "dataSet2",
+            "request": "launch",
+            "mainClass": "Q1.dataSet2",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "Selection",
+            "request": "launch",
+            "mainClass": "Selection",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
             "name": "dataSet2",
             "request": "launch",
             "mainClass": "dataSet2",

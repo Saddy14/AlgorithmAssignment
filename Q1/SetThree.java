@@ -1,12 +1,13 @@
+package Q1;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
-public class SetSix {
+public class SetThree {
     
-    SetSix () throws IOException {
+    SetThree () throws IOException {
 
-        FileWriter writer = new FileWriter("./Set6.csv");
+        FileWriter writer = new FileWriter("./Set3.csv");
         Random random = new Random();
         // random.setSeed(1211101398); //setting the seed to get random-nums more distinct from other grp's
         // int[] seedRef = {1, 2, 1, 1, 1, 0, 1, 3, 9, 8};
@@ -15,7 +16,7 @@ public class SetSix {
         // ArrayList<Integer> casePicker = new ArrayList<>(Arrays.asList(0,1,2) );
         System.out.println(seedRef.length);
 
-        for (int i = 0; i < 1_000_000; i++) {
+        for (int i = 0; i < 10_000; i++) {
 
             // Collections.shuffle(casePicker);
             
