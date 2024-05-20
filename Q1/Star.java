@@ -2,7 +2,6 @@ package Q1;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Star {
@@ -18,15 +17,14 @@ public class Star {
         Star.connect3(myStars); // 14 Edges Used, All 54 Edges used
         
         FileWriter writer = new FileWriter("./dataSet2.csv");
-        writer.write("Star Name, x, y, z, weight, profit, ConnectedStar\n");
+        writer.write("Star Name, x, y, z, weight, profit\n");
 
         for (Star star : myStars) {
             
             System.out.println(star);
             // writer.append();
             writer.append(String.valueOf(star.getName()) + ", " + String.valueOf(star.getX()) + ", " + String.valueOf(star.getY()) + 
-            ", "+ String.valueOf(star.getZ()) + ", " + String.valueOf(star.getWeight()) + ", " + String.valueOf(star.getProfit())  + 
-            ", " + connectedStarsName(star.getConnectedStars()) + "\n");
+            ", "+ String.valueOf(star.getZ()) + ", " + String.valueOf(star.getWeight()) + ", " + String.valueOf(star.getProfit()) + "\n");
 
         }
         writer.close();
@@ -137,15 +135,15 @@ public class Star {
     //     return connectedStarsName.toString();
     // }
 
-    private String connectedStarsName(ArrayList<Star> connectedStars) {
-        List<String> starNames = new ArrayList<>();
+    // private String connectedStarsName(ArrayList<Star> connectedStars) {
+    //     List<String> starNames = new ArrayList<>();
 
-        for (Star star : connectedStars) {
-            starNames.add(String.valueOf(star.getName()));
-        }
+    //     for (Star star : connectedStars) {
+    //         starNames.add(String.valueOf(star.getName()));
+    //     }
 
-        return "[" + String.join(", ", starNames) + "]";
-    }
+    //     return "(" + String.join(", ", starNames) + ")";
+    // }
 
     private String connectedStarsName() {
 
