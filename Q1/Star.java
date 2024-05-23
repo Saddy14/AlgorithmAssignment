@@ -1,7 +1,10 @@
 package Q1;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Star {
@@ -22,7 +25,7 @@ public class Star {
         for (Star star : myStars) {
             
             System.out.println(star);
-            // writer.append();
+
             writer.append(String.valueOf(star.getName()) + ", " + String.valueOf(star.getX()) + ", " + String.valueOf(star.getY()) + 
             ", "+ String.valueOf(star.getZ()) + ", " + String.valueOf(star.getWeight()) + ", " + String.valueOf(star.getProfit()) + "\n");
 
@@ -118,6 +121,41 @@ public class Star {
     public static void writeInFile() {
 
 
+    }
+
+    public static void makeStarFromFile() throws IOException {
+
+        Star[] myStars = new Star[20];
+
+        BufferedReader br = new BufferedReader(new FileReader("./dataSet2.csv"));
+        String data = "";
+        int[] pew = new int[120];
+        int i = 0;
+        br.readLine();
+
+        while ((data = br.readLine()) != null) {
+
+            String[] splitData = data.split(",");
+
+            for (String str : splitData) {
+
+                if (i < pew.length) {
+                    pew[i++] = Integer.parseInt(str);
+                }
+            }
+        }
+
+        System.out.println(Arrays.toString(pew));
+        br.close();
+    }
+
+    public static void starDistance (Star a, Star b) {
+
+        double distance = Math.sqrt( (Math.pow(b.getX() - a.getX(), 2)) + (Math.pow(b.getY() - a.getY(), 2)) + (Math.pow(b.getZ() - a.getZ(), 2)) );
+    
+        System.out.println("From Distance function: " + distance);
+    
+        // return distance;    
     }
 
     // private String connectedStarsName(ArrayList<Star> connectedStars) {

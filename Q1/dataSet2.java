@@ -13,5 +13,9 @@ public class dataSet2 {
         }
 
         new Star(myStars);
+
+        Star.makeStarFromFile();
+
+        // System.out.println( (1221301122 ) % 10 );
     }
 }
