@@ -30,6 +30,8 @@ public class Star {
             ", "+ String.valueOf(star.getZ()) + ", " + String.valueOf(star.getWeight()) + ", " + String.valueOf(star.getProfit()) + "\n");
 
         }
+
+        outputConnectedStarsToCSV(myStars, "connected_stars.csv");
         writer.close();
 
         int totalWeight = 0;
@@ -147,6 +149,23 @@ public class Star {
 
         System.out.println(Arrays.toString(pew));
         br.close();
+    }
+
+    public static void outputConnectedStarsToCSV(Star[] myStars, String filename) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.append("Star Name,Connected Star Name\n");
+        
+            for (int i = 0; i < myStars.length; i++) {
+               // List<Star> connectedStars = myStars[i].getConnectedStars(); // Method to get connected stars
+                for (Star star : myStars[i].getConnectedStars()) {
+                  //  int connectedIndex = getIndexOfStar(myStars, star);
+                    writer.append(i+1 + "," + star.getName() + "\n");
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the CSV file.");
+            e.printStackTrace();
+        }
     }
 
     public double calculateDistance(Star other) {
@@ -320,3 +339,5 @@ public class Star {
     }
 
 }
+
+   
