@@ -149,6 +149,10 @@ public class Star {
         br.close();
     }
 
+    public double calculateDistance(Star other) {
+        return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2) + Math.pow(other.z - this.z, 2));
+    }
+    
     public static void starDistance (Star a, Star b) {
 
         double distance = Math.sqrt( (Math.pow(b.getX() - a.getX(), 2)) + (Math.pow(b.getY() - a.getY(), 2)) + (Math.pow(b.getZ() - a.getZ(), 2)) );
@@ -316,5 +320,3 @@ public class Star {
     }
 
 }
-
-
