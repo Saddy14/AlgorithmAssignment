@@ -168,10 +168,7 @@ public class Star {
         }
     }
 
-    public double calculateDistance(Star other) {
-        return Math.sqrt(Math.pow(other.x - this.x, 2) + Math.pow(other.y - this.y, 2) + Math.pow(other.z - this.z, 2));
-    }
-    
+   
     public static void starDistance (Star a, Star b) {
 
         double distance = Math.sqrt( (Math.pow(b.getX() - a.getX(), 2)) + (Math.pow(b.getY() - a.getY(), 2)) + (Math.pow(b.getZ() - a.getZ(), 2)) );
@@ -179,6 +176,10 @@ public class Star {
         System.out.println("From Distance function: " + distance);
     
         // return distance;    
+    }
+
+    public static double calculateDistance(double[] pos1, double[] pos2) {
+        return Math.sqrt(Math.pow(pos2[0] - pos1[0], 2) + Math.pow(pos2[1] - pos1[1], 2) + Math.pow(pos2[2] - pos1[2], 2));
     }
 
     // private String connectedStarsName(ArrayList<Star> connectedStars) {
@@ -339,5 +340,7 @@ public class Star {
     }
 
 }
+
+   
 
    
