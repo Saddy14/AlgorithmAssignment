@@ -3,6 +3,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -178,8 +180,12 @@ public class Star {
         // return distance;    
     }
 
-    public static double calculateDistance(double[] pos1, double[] pos2) {
-        return Math.sqrt(Math.pow(pos2[0] - pos1[0], 2) + Math.pow(pos2[1] - pos1[1], 2) + Math.pow(pos2[2] - pos1[2], 2));
+   
+    public static int calculateDistance(double[] pos1, double[] pos2) {
+        double distance = Math.sqrt(Math.pow(pos2[0] - pos1[0], 2) + Math.pow(pos2[1] - pos1[1], 2) + Math.pow(pos2[2] - pos1[2], 2));
+        BigDecimal bd = new BigDecimal(distance);
+        bd = bd.setScale(0, RoundingMode.HALF_UP);  // Set scale to 0 for rounding to nearest whole number
+        return bd.intValue();  // Return the rounded value as an integer
     }
 
     // private String connectedStarsName(ArrayList<Star> connectedStars) {
@@ -339,8 +345,10 @@ public class Star {
         return Integer.parseInt(String.valueOf(temp) + String.valueOf(temp2) + String.valueOf(temp3)); //
     }
 
+
 }
 
+   
    
 
    
