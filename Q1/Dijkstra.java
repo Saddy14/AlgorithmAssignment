@@ -7,9 +7,9 @@ import java.util.*;
 
 class Edge {
     int vertex;
-    double distance;
+    int distance;
 
-    public Edge(int vertex, double distance) {
+    public Edge(int vertex, int distance) {
         this.vertex = vertex;
         this.distance = distance;
     }
@@ -35,7 +35,7 @@ class Graph {
     }
 
 
-    public void addEdge(int source, int destination, double distance) {
+    public void addEdge(int source, int destination, int distance) {
         // Add edge from source to destination if it doesn't exist
         if (!edgeExists(source, destination, distance)) {
             adjacencyList.get(source).add(new Edge(destination, distance));
@@ -61,7 +61,7 @@ class Graph {
         for (int i = 1; i < adjacencyList.size(); i++) {
             System.out.print("Star " + i + ": ");
             for (Edge edge : adjacencyList.get(i)) {
-                System.out.print("(" + edge.vertex + ", " + String.format("%.2f", edge.distance) + ") ");
+                System.out.print("(" + edge.vertex + ", " +  edge.distance + ") ");
             }
             System.out.println();
         }
@@ -72,7 +72,7 @@ class Graph {
         boolean[] visited = new boolean[graph.vertices + 1];
 
         // stores the shortest distance from the source vertex to every other vertex
-        double[] distances = new double[graph.vertices + 1];
+        int[] distances = new int[graph.vertices + 1];
 
         // holds the previous vertex from the source for each vertex
         int[] predecessors = new int[graph.vertices + 1];
@@ -85,7 +85,7 @@ class Graph {
         // The distance to the source vertex is set to 0, as no distance to itself
         distances[sourceVertex] = 0;
 
-        PriorityQueue<Edge> pq = new PriorityQueue<>(Comparator.comparingDouble(e -> e.distance));
+        PriorityQueue<Edge> pq = new PriorityQueue<>(Comparator.comparingInt(e -> e.distance));
         pq.offer(new Edge(sourceVertex, 0));
 
         while (!pq.isEmpty()) {
@@ -101,7 +101,7 @@ class Graph {
             List<Edge> edges = graph.adjacencyList.get(currentVertex);
             for (Edge edge : edges) {
                 if (!visited[edge.vertex]) {
-                    double newDist = distances[currentVertex] + edge.distance;
+                    int newDist = distances[currentVertex] + edge.distance;
                     if (newDist < distances[edge.vertex]) {
                         distances[edge.vertex] = newDist;
                         predecessors[edge.vertex] = currentVertex;
@@ -115,11 +115,11 @@ class Graph {
         printPaths(sourceVertex, predecessors, graph.vertices);
     }
 
-    private static void printDistances(double[] distances, int sourceVertex) {
+    private static void printDistances(int[] distances, int sourceVertex) {
         System.out.println("\nShortest paths from star " + sourceVertex + ":");
         for (int i = 1; i < distances.length; i++) {
             System.out.println("To star " + i + " - "
-                    + (distances[i] == Double.MAX_VALUE ? "No path" : String.format("%.2f", distances[i])));
+                    + (distances[i] == Integer.MAX_VALUE ? "No path" : Integer.toString(distances[i])));
         }
     }
 
@@ -169,7 +169,7 @@ class Graph {
                 int star2 = Integer.parseInt(values[1]);
                 double[] pos1 = starPositions.get(star1);
                 double[] pos2 = starPositions.get(star2);
-                double distance = Star.calculateDistance(pos1, pos2);
+                int distance = Star.calculateDistance(pos1, pos2);
                 graph.addEdge(star1, star2, distance);
             }
         } catch (IOException e) {
@@ -184,7 +184,7 @@ class Graph {
        processFile(graph);
 
         // uncomment this for adjacency list
-      // graph.printAdjacencyList();
+       //graph.printAdjacencyList();
 
         // Start timing
         long startTime = System.currentTimeMillis();
