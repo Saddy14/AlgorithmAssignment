@@ -11,6 +11,7 @@ public class Selectionsort {
 
     public static void processFile(String inputFile, String outputFile) {
         try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
+
             String line;
             List<Integer> list = new ArrayList<>();// create a list to store the integers
             while ((line = reader.readLine()) != null) { // read all lines
@@ -21,7 +22,6 @@ public class Selectionsort {
                     list.add(Integer.parseInt(stringValue));
                 }
             }
-
             // convert the list to an array
             int[] numbers = list.stream().mapToInt(i -> i).toArray();
 
@@ -33,8 +33,7 @@ public class Selectionsort {
             long endTime = System.currentTimeMillis();
 
             // Calculate the time taken to insert all data into the priority queue
-            long timeTaken = endTime - startTime;
-            System.out.println("Time taken to sort all data: " + timeTaken + " milliseconds");
+            System.out.println("Time taken to sort all data: " + (endTime - startTime) + " ms");
 
             // write the sorted array to a CSV file
             try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {

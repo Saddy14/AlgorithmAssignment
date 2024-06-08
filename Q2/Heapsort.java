@@ -26,15 +26,7 @@ public class Heapsort {
             // convert the list to an array
             int[] A = list.stream().mapToInt(i -> i).toArray();
 
-            // Record the start time before inserting data into the priority queue
-            long startTime = System.currentTimeMillis();
             heapSort(A);
-            // Record the end time after inserting data into the priority queue
-            long endTime = System.currentTimeMillis();
-
-            // Calculate the time taken to insert all data into the priority queue
-            long timeTaken = endTime - startTime;
-            System.out.println("Time taken to insert all data into the priority queue: " + timeTaken + " milliseconds");
 
             // write the sorted array to a CSV file
             try (PrintWriter writer = new PrintWriter(new FileWriter(outputFile))) {
@@ -73,11 +65,20 @@ public class Heapsort {
     }
 
     private static void heapSort(int[] A) {
+
         int arraySize = A.length;
+
+        // Record the start time before building the heap
+        long startTime = System.currentTimeMillis();
 
         // Build heap (rearrange array)
         for (int j = arraySize / 2 - 1; j >= 0; j--)
             heapify(A, arraySize, j);
+        // Record the end time after building the heap
+        long endTime = System.currentTimeMillis();
+
+        // Calculate the time taken to build the heap
+        System.out.println("Time taken to insert all data into the priority queue: " + (endTime - startTime) + " ms");
 
         // Record the start time before dequeuing the data
         long startTime1 = System.currentTimeMillis();
@@ -96,7 +97,6 @@ public class Heapsort {
         long endTime1 = System.currentTimeMillis();
 
         // Calculate the time taken to dequeue the data
-        long timeTaken1 = endTime1 - startTime1;
-        System.out.println("Time taken to dequeue the data: " + timeTaken1 + " milliseconds");
+        System.out.println("Time taken to dequeue the data: " + (endTime1 - startTime1) + " ms");
     }
 }
