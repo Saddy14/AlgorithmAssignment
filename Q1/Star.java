@@ -127,31 +127,31 @@ public class Star {
 
     }
 
-    public static void makeStarFromFile() throws IOException {
+    // public static void makeStarFromFile() throws IOException {
 
-        Star[] myStars = new Star[20];
+    //     Star[] myStars = new Star[20];
 
-        BufferedReader br = new BufferedReader(new FileReader("./dataSet2.csv"));
-        String data = "";
-        int[] pew = new int[120];
-        int i = 0;
-        br.readLine();
+    //     BufferedReader br = new BufferedReader(new FileReader("./dataSet2.csv"));
+    //     String data = "";
+    //     int[] pew = new int[120];
+    //     int i = 0;
+    //     br.readLine();
 
-        while ((data = br.readLine()) != null) {
+    //     while ((data = br.readLine()) != null) {
 
-            String[] splitData = data.split(",");
+    //         String[] splitData = data.split(",");
 
-            for (String str : splitData) {
+    //         for (String str : splitData) {
 
-                if (i < pew.length) {
-                    pew[i++] = Integer.parseInt(str);
-                }
-            }
-        }
+    //             if (i < pew.length) {
+    //                 pew[i++] = Integer.parseInt(str);
+    //             }
+    //         }
+    //     }
 
-        System.out.println(Arrays.toString(pew));
-        br.close();
-    }
+    //     System.out.println(Arrays.toString(pew));
+    //     br.close();
+    // }
 
     public static void outputConnectedStarsToCSV(Star[] myStars, String filename) {
         try (FileWriter writer = new FileWriter(filename)) {

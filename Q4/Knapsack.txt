@@ -1,0 +1,14 @@
+Star Name: 19, Weight: 91, Profit: 973
+Star Name: 16, Weight: 31, Profit: 79
+Star Name: 15, Weight: 11, Profit: 617
+Star Name: 14, Weight: 71, Profit: 911
+Star Name: 12, Weight: 66, Profit: 70
+Star Name: 9, Weight: 96, Profit: 931
+Star Name: 8, Weight: 17, Profit: 71
+Star Name: 6, Weight: 33, Profit: 91
+Star Name: 4, Weight: 79, Profit: 906
+Star Name: 3, Weight: 99, Profit: 336
+Star Name: 2, Weight: 99, Profit: 909
+Star Name: 1, Weight: 96, Profit: 691
+Total Weight: 789
+Total Profit: 6585

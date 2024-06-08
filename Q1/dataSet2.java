@@ -1,7 +1,7 @@
 package Q1;
 import java.io.IOException;
 
-public class dataSet2 {
+public class DataSet2 {
     public static void main(String[] args) throws IOException {
         
         Star[] myStars = new Star[20];
@@ -14,7 +14,7 @@ public class dataSet2 {
 
         new Star(myStars);
 
-        Star.makeStarFromFile();
+        // Star.makeStarFromFile();
 
         // System.out.println( (1221301122 ) % 10 );
     }

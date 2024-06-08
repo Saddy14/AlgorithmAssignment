@@ -2,6 +2,83 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Knapsack",
+            "request": "launch",
+            "mainClass": "Q4.Knapsack",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "Knapsack",
+            "request": "launch",
+            "mainClass": "Knapsack",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "KruskalAlgorithm",
+            "request": "launch",
+            "mainClass": "KruskalAlgorithm",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "Heap",
+            "request": "launch",
+            "mainClass": "Q2.Heap",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "DataSet1",
+            "request": "launch",
+            "mainClass": "Q1.DataSet1",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "KruskalAlgorithm",
+            "request": "launch",
+            "mainClass": "Q2.KruskalAlgorithm",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "Graph",
+            "request": "launch",
+            "mainClass": "Q2.Graph",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "Graph",
+            "request": "launch",
+            "mainClass": "Graph",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "Graph",
+            "request": "launch",
+            "mainClass": "Q1.Graph",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "KruskalAlgorithm",
+            "request": "launch",
+            "mainClass": "Q1.KruskalAlgorithm",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "DataSet2",
+            "request": "launch",
+            "mainClass": "Q1.DataSet2",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
             "name": "dataSet1",
             "request": "launch",
             "mainClass": "Q1.dataSet1",
