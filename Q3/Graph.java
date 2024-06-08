@@ -4,8 +4,11 @@ package Q3;
 import Q1.Star;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 
@@ -72,7 +75,7 @@ class Graph {
         }
     }
 
-    public static void dijkstra(Graph graph, int sourceVertex) {
+    public static void dijkstra(Graph graph, int sourceVertex, PrintWriter writer) {
         // keeps track of whether a vertex has been fully processed
         boolean[] visited = new boolean[graph.vertices + 1];
 
@@ -116,35 +119,40 @@ class Graph {
             }
         }
 
-        printDistances(distances, sourceVertex);
-        printPaths(sourceVertex, predecessors, graph.vertices);
+        printDistances(distances, sourceVertex, writer);
+        printPaths(sourceVertex, predecessors, graph.vertices, writer);
     }
 
-    private static void printDistances(int[] distances, int sourceVertex) {
-        System.out.println("\nShortest paths from star " + sourceVertex + ":");
+    private static void printDistances(int[] distances, int sourceVertex, PrintWriter writer) {
+        writer.println("Shortest paths from star " + sourceVertex);
         for (int i = 1; i < distances.length; i++) {
-            System.out.println("To star " + i + " - "
-                    + (distances[i] == Integer.MAX_VALUE ? "No path" : Integer.toString(distances[i])));
+            writer.println("To star " + i + ", " + (distances[i] == Integer.MAX_VALUE ? "No path" : Integer.toString(distances[i])));
         }
+        writer.println();
     }
 
-    public static void printPaths(int sourceVertex, int[] predecessors, int vertices) {
-        System.out.println("\nGraph representing shortest Paths from star " + sourceVertex + ":");
+    public static void printPaths(int sourceVertex, int[] predecessors, int vertices, PrintWriter writer) {
+       
+        writer.println("Graph representing shortest Paths from star " + sourceVertex);
         for (int i = 0; i <= vertices; i++) {
             if (i != sourceVertex && predecessors[i] != -1) {
-                System.out.print("Path to star " + i + ": ");
-                printPath(i, predecessors);
-                System.out.println();
+                writer.print("Path to star " + i + ", ");
+                printPath(i, predecessors, writer);
+                writer.println();
             }
         }
+        writer.println(); 
     }
 
-    public static void printPath(int vertex, int[] predecessors) {
+    public static void printPath(int vertex, int[] predecessors, PrintWriter writer) {
+      
+        //System.out.print(vertex);
+
         if (predecessors[vertex] != -1) {
-            printPath(predecessors[vertex], predecessors);
-            System.out.print(" -> ");
+            printPath(predecessors[vertex], predecessors, writer);
+            writer.print(" -> ");
         }
-        System.out.print(vertex);
+        writer.print(vertex);
     }
 
     public static void processFile(Graph graph) {
@@ -194,7 +202,17 @@ class Graph {
         // Start timing
         long startTime = System.currentTimeMillis();
 
-        dijkstra(graph, 1);
+        try {
+        PrintWriter writer = new PrintWriter(new File("Q3/D_results.txt"));
+        
+
+        dijkstra(graph, 1, writer);
+
+        writer.close();  // Make sure to close the PrintWriter to flush data to file
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
 
         // End timing
         long endTime = System.currentTimeMillis();
