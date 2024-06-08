@@ -2,17 +2,20 @@ package Q3;
 
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import Q1.Star;
 
-class Edge{
+class EdgeK{
     int src, dest;
     int distance;
 
-    Edge(int src, int dest, int distance) {
+    EdgeK(int src, int dest, int distance) {
         this.src = src;
         this.dest = dest;
         this.distance = distance;
@@ -31,12 +34,12 @@ public class KruskalAlgorithm {
         return parent[i];
     }
 
-    public void Kruskal(ArrayList<Edge> edges, int V) {
+    public void Kruskal(ArrayList<EdgeK> edges, int V,  PrintWriter writer) {
         //sorts the edges of the graph based on their weights in ascending order.
         // Sort using Comparator
-        Collections.sort(edges, new Comparator<Edge>() {
+        Collections.sort(edges, new Comparator<EdgeK>() {
             @Override
-            public int compare(Edge edge1, Edge edge2) {
+            public int compare(EdgeK edge1, EdgeK edge2) {
                 return Integer.compare(edge1.distance, edge2.distance);
             }
         });
@@ -47,9 +50,9 @@ public class KruskalAlgorithm {
         }
 
         int mst_weight = 0;
-        List<Edge> mst = new ArrayList<>();
+        List<EdgeK> mst = new ArrayList<>();
 
-        for (Edge edge : edges) {
+        for (EdgeK edge : edges) {
             //
             int x = find(edge.src);
             int y = find(edge.dest);
@@ -66,16 +69,17 @@ public class KruskalAlgorithm {
             if (mst.size() == V - 1) break;
         }
 
-        System.out.println("Edges in MST");
-        for (Edge edge : mst) {
-            System.out.println(edge.src + " -- " + edge.dest + "  distance:  " + edge.distance);
+
+        writer.println("Edges in MST");
+        for (EdgeK edge : mst) {
+            writer.println(edge.src + " -- " + edge.dest + "  distance:  " + edge.distance);
         }
-        System.out.println("\ntotal MST: " + mst_weight);
+        writer.println("\nTotal MST weight: " + mst_weight);
     }
 
     public static void main(String[] args) {
        // String filePath = "dataSet2.csv"; // Path to the CSV file
-        ArrayList<Edge> edges = new ArrayList<>();
+        ArrayList<EdgeK> edges = new ArrayList<>();
         int vertices = 20;  // Number of vertices in graph
 
         HashMap<Integer, double[]> starPositions = new HashMap<>();
@@ -106,9 +110,18 @@ public class KruskalAlgorithm {
                 double[] pos1 = starPositions.get(star1);
                 double[] pos2 = starPositions.get(star2);
                 int distance = Star.calculateDistance(pos1, pos2);
-                edges.add(new Edge(star1, star2, distance));
+                edges.add(new EdgeK(star1, star2, distance));
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //write the results
+        try (PrintWriter writer = new PrintWriter(new File("Q3/K_results.txt"))) {
+            KruskalAlgorithm kruskal = new KruskalAlgorithm();
+            kruskal.Kruskal(edges, vertices, writer);
+        } catch (FileNotFoundException e) {
+            System.err.println("Failed to open file for writing: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -121,7 +134,5 @@ public class KruskalAlgorithm {
        // edges.add(new Edge(2, 0, 2)); //Edge(2, 0, 2): find(2) traces back to 0, and find(0) finds root 0. Since the roots are the same, adding this edge would create a cycle. Skip this edge.
         
 
-        KruskalAlgorithm kruskal = new KruskalAlgorithm();
-        kruskal.Kruskal(edges, vertices);
     }
 }
