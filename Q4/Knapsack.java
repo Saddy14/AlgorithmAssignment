@@ -1,4 +1,3 @@
-package Q4;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -7,7 +6,7 @@ import java.util.ArrayList;
 
 public class Knapsack {
     public static void main(String[] args) {
-        String csvFile = "./dataSet2.csv";
+        String csvFile = "C:\\Users\\xinth\\OneDrive\\Desktop\\Algo assignment\\AlgorithmAssignment-1\\dataSet2.csv";
         String line = "";
         String csvSplitBy = ",";
 
@@ -136,4 +135,3 @@ public class Knapsack {
         }
     }
 }
-
