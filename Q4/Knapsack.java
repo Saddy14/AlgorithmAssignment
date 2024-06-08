@@ -4,114 +4,136 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
-class Star {
-    String name;
-    int x, y, z, weight, profit;
-
-    public Star(String name, int x, int y, int z, int weight, int profit) {
-        this.name = name;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.weight = weight;
-        this.profit = profit;
-    }
-
-    //Change to string before save into txt files
-    @Override
-    public String toString() {
-        return "Star Name: " + name + ", Weight: " + weight + ", Profit: " + profit;
-    }
-}
 
 public class Knapsack {
     public static void main(String[] args) {
         String csvFile = "./dataSet2.csv";
-        String line;
+        String line = "";
         String csvSplitBy = ",";
-        List<Star> stars = new ArrayList<>();
+
+        ArrayList<Integer> num_of_stars = new ArrayList<>();
+        ArrayList<Integer> stars_weight = new ArrayList<>();
+        ArrayList<Integer> stars_profit = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             br.readLine();
+
             while ((line = br.readLine()) != null) {
-                String[] starData = line.split(csvSplitBy);
+                String[] star = line.split(csvSplitBy);
 
-                try {
-                    String name = starData[0].trim();
-                    int x = Integer.parseInt(starData[1].trim());
-                    int y = Integer.parseInt(starData[2].trim());
-                    int z = Integer.parseInt(starData[3].trim());
-                    int weight = Integer.parseInt(starData[4].trim());
-                    int profit = Integer.parseInt(starData[5].trim());
-
-                    stars.add(new Star(name, x, y, z, weight, profit));
-                } catch (NumberFormatException e) {
-                    System.out.println("Skipping invalid number format in line: " + line);
-                }
+                num_of_stars.add(Integer.parseInt(star[0].trim()));
+                stars_weight.add(Integer.parseInt(star[4].trim()));
+                stars_profit.add(Integer.parseInt(star[5].trim()));
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        int maxCapacity = 800;
-        knapsack(stars, maxCapacity);
+        System.out.println("Number of Stars: " + num_of_stars);
+        System.out.println("Stars Weight: " + stars_weight);
+        System.out.println("Stars Profit: " + stars_profit);
+
+        int maxCapacity = 800;  // Maximum capacity
+        int[][] knapsackTable = new int[num_of_stars.size() + 1][maxCapacity + 1];  // Table row and column 21 x 801
+        ArrayList<Integer> selectedStars = new ArrayList<>();
+        int[] result = knapsack(stars_weight, stars_profit, num_of_stars, maxCapacity, knapsackTable, selectedStars);
+
+        System.out.println("Total profit: " + result[0]);
+        System.out.println("Total weight: " + result[1]);
+
+        saveResults("Knapsack.txt", knapsackTable, selectedStars, result[0], result[1], num_of_stars, stars_weight, stars_profit);
     }
 
-    public static void knapsack(List<Star> stars, int maxCapacity) {
-        int n = stars.size();
-        int[][] dp = new int[n + 1][maxCapacity + 1];
+    public static int[] knapsack(ArrayList<Integer> weights, ArrayList<Integer> profits, ArrayList<Integer> stars, int maxCapacity, int[][] knapsackTable, ArrayList<Integer> selectedStars) {
+        int n = weights.size(); // Number of items
 
-        for (int i = 1; i <= n; i++) {
-            Star star = stars.get(i - 1);
-            for (int w = 1; w <= maxCapacity; w++) {
-                if (star.weight <= w) {
-                    dp[i][w] = Math.max(dp[i - 1][w], dp[i - 1][w - star.weight] + star.profit);
-                } else {
-                    dp[i][w] = dp[i - 1][w];
+        // Create table
+        for (int i = 0; i <= n; i++) {
+            for (int w = 0; w <= maxCapacity; w++) {
+                // Condition 1, if bag capacity =0 or no items, profit is 0
+                if (i == 0 || w == 0) {
+                    knapsackTable[i][w] = 0;
+                }
+                // Condition 2, items weight <= bag weight
+                else if (weights.get(i - 1) <= w) {
+                    knapsackTable[i][w] = Math.max(profits.get(i - 1) + knapsackTable[i - 1][w - weights.get(i - 1)], knapsackTable[i - 1][w]);
+                }
+                // Condition 3, items weight > bag weight
+                else {
+                    knapsackTable[i][w] = knapsackTable[i - 1][w];
                 }
             }
         }
 
+        // To find out which items are included, we need to backtrack
+        int profit_result = knapsackTable[n][maxCapacity];
         int w = maxCapacity;
         int totalWeight = 0;
-        int totalProfit = 0;
-        List<Star> selectedStars = new ArrayList<>();
-        for (int i = n; i > 0 && w > 0; i--) {
-            if (dp[i][w] != dp[i - 1][w]) {
-                Star star = stars.get(i - 1);
-                selectedStars.add(star);
-                w -= star.weight;
-                totalWeight += star.weight;
-                totalProfit += star.profit;
+
+        for (int i = n; i > 0 && profit_result > 0; i--) {
+            // If the profit is different, then this item was included
+            if (profit_result != knapsackTable[i - 1][w]) {
+                selectedStars.add(i - 1);
+
+                // Since this item is included, its weight is subtracted
+                profit_result -= profits.get(i - 1);
+                w -= weights.get(i - 1);
+
+                // Add weight of the selected item
+                totalWeight += weights.get(i - 1);
             }
         }
 
-        // Display the results
-        System.out.println("Selected Stars:");
-        for (Star star : selectedStars) {
-            System.out.println("Star Name: " + star.name + ", Weight: " + star.weight + ", Profit: " + star.profit);
-        }
+        System.out.println("Selected stars: " + selectedStars);
 
-        // Display total weight and total profit
-        System.out.println("Total Weight: " + totalWeight);
-        System.out.println("Total Profit: " + totalProfit);
-       
-        //Write the results into txt file
-        saveResults(selectedStars, totalWeight, totalProfit);
+        return new int[]{knapsackTable[n][maxCapacity], totalWeight};
     }
 
-    //Write file
-    public static void saveResults(List<Star> selectedStars, int totalWeight, int totalProfit) {
-        try (FileWriter saveResult = new FileWriter("Q4/Knapsack.txt")) {
-            for (Star star : selectedStars) {
-                saveResult.write(star.toString() + "\n");
+    public static void saveResults(String filename, int[][] knapsackTable, ArrayList<Integer> selectedStars, int totalProfit, int totalWeight, ArrayList<Integer> num_of_stars, ArrayList<Integer> stars_weight, ArrayList<Integer> stars_profit) {
+        try (FileWriter writer = new FileWriter(filename)) {
+            // Write the header row (weights)
+            writer.write("+-------+");
+            for (int j = 0; j < knapsackTable[0].length; j++) {
+                writer.write("----+");
             }
-            saveResult.write("Total Weight: " + totalWeight + "\n");
-            saveResult.write("Total Profit: " + totalProfit + "\n");
+            writer.write("\n|Item/W |");
+            for (int j = 0; j < knapsackTable[0].length; j++) {
+                writer.write(String.format("%4d|", j));
+            }
+            writer.write("\n+-------+");
+            for (int j = 0; j < knapsackTable[0].length; j++) {
+                writer.write("----+");
+            }
+            writer.write("\n");
+
+            // Write the table with items as rows
+            for (int i = 0; i < knapsackTable.length; i++) {
+                if (i == 0) {
+                    writer.write("|   0   |"); // For the first row (no items)
+                } else {
+                    writer.write(String.format("| %5d |", num_of_stars.get(i - 1)));
+                }
+                for (int j = 0; j < knapsackTable[i].length; j++) {
+                    writer.write(String.format("%4d|", knapsackTable[i][j]));
+                }
+                writer.write("\n+-------+");
+                for (int j = 0; j < knapsackTable[0].length; j++) {
+                    writer.write("----+");
+                }
+                writer.write("\n");
+            }
+
+            writer.write("\nSelected stars:\n");
+            for (int i : selectedStars) {
+                writer.write(String.format("Star Name: %d, Weight: %d, Profit: %d\n", num_of_stars.get(i), stars_weight.get(i), stars_profit.get(i)));
+            }
+
+            writer.write("\nTotal profit: " + totalProfit + "\n");
+            writer.write("Total weight: " + totalWeight + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+
