@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "HeapMain",
+            "request": "launch",
+            "mainClass": "Q2.HeapMain",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "KruskalAlgorithm",
+            "request": "launch",
+            "mainClass": "Q3.KruskalAlgorithm",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
+            "name": "Dijkstra",
+            "request": "launch",
+            "mainClass": "Q3.Dijkstra",
+            "projectName": "AlgorithmAssignment_e447f109"
+        },
+        {
+            "type": "java",
             "name": "Knapsack",
             "request": "launch",
             "mainClass": "Q4.Knapsack",

@@ -9,18 +9,14 @@ public class SetTwo {
 
         FileWriter writer = new FileWriter("./Set2.csv");
         Random random = new Random();
-        // random.setSeed(1211101398); //setting the seed to get random-nums more distinct from other grp's
-        // int[] seedRef = {1, 2, 1, 1, 1, 0, 1, 3, 9, 8};
+
         int[] seedRef = {1, 2, 2, 1, 3, 0, 1, 8, 7, 4};
 
-        // ArrayList<Integer> casePicker = new ArrayList<>(Arrays.asList(0,1,2) );
-        System.out.println(seedRef.length);
+        long startTime = System.currentTimeMillis();
 
         for (int i = 0; i < 1000; i++) {
-
-            // Collections.shuffle(casePicker);
             
-            switch (random.nextInt(3)) {
+            switch (random.nextInt(4)) {
 
                 case 0:
                     generateT(random, seedRef, writer);
@@ -32,13 +28,15 @@ public class SetTwo {
                     generateTh(random, seedRef, writer);
                     break;
                 case 3:
-    
-
+                    generateTenTh(random, seedRef, writer);
+                    break;
                 default:
                     break;
             }
-
         }
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("Time taken to Generate Set 2: " + (endTime - startTime) + " ms");
 
         writer.close();
     }
@@ -64,8 +62,7 @@ public class SetTwo {
     }
 
     void generateTh(Random random, int[] seedRef, FileWriter writer) throws IOException { //for 1,000s
-
-        
+ 
         int temp = seedRef[Math.abs(random.nextInt()) % seedRef.length];
         int temp2 = seedRef[Math.abs(random.nextInt()) % seedRef.length];
         int temp3 = seedRef[Math.abs(random.nextInt()) % seedRef.length];
@@ -75,5 +72,20 @@ public class SetTwo {
         writer.append(String.valueOf(temp2));
         writer.append(String.valueOf(temp3));
         writer.append(String.valueOf(temp4) + "\n");
+    }
+
+    void generateTenTh(Random random, int[] seedRef, FileWriter writer) throws IOException { //for 10,000s
+
+        int temp = seedRef[Math.abs(random.nextInt()) % seedRef.length];  // 1st Digit
+        int temp2 = seedRef[Math.abs(random.nextInt()) % seedRef.length]; // 2nd Digit
+        int temp3 = seedRef[Math.abs(random.nextInt()) % seedRef.length]; // 3rd Digit
+        int temp4 = seedRef[Math.abs(random.nextInt()) % seedRef.length]; // 4th Digit
+        int temp5 = seedRef[Math.abs(random.nextInt()) % seedRef.length]; // 5th Digit
+
+        writer.append(String.valueOf(temp));
+        writer.append(String.valueOf(temp2));
+        writer.append(String.valueOf(temp3));
+        writer.append(String.valueOf(temp4));
+        writer.append(String.valueOf(temp5) + "\n");
     }
 }
