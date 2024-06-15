@@ -1,12 +1,12 @@
 package Q1;
-import java.io.BufferedReader;
-import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
-import java.util.Arrays;
+// import java.util.Arrays;
 import java.util.Random;
 
 public class Star {
@@ -127,32 +127,6 @@ public class Star {
 
     }
 
-    // public static void makeStarFromFile() throws IOException {
-
-    //     Star[] myStars = new Star[20];
-
-    //     BufferedReader br = new BufferedReader(new FileReader("./dataSet2.csv"));
-    //     String data = "";
-    //     int[] pew = new int[120];
-    //     int i = 0;
-    //     br.readLine();
-
-    //     while ((data = br.readLine()) != null) {
-
-    //         String[] splitData = data.split(",");
-
-    //         for (String str : splitData) {
-
-    //             if (i < pew.length) {
-    //                 pew[i++] = Integer.parseInt(str);
-    //             }
-    //         }
-    //     }
-
-    //     System.out.println(Arrays.toString(pew));
-    //     br.close();
-    // }
-
     public static void outputConnectedStarsToCSV(Star[] myStars, String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
             writer.append("Star Name,Connected Star Name\n");
@@ -187,31 +161,6 @@ public class Star {
         bd = bd.setScale(0, RoundingMode.HALF_UP);  // Set scale to 0 for rounding to nearest whole number
         return bd.intValue();  // Return the rounded value as an integer
     }
-
-    // private String connectedStarsName(ArrayList<Star> connectedStars) {
-
-    //     StringBuilder connectedStarsName = new StringBuilder();
-
-    //     connectedStarsName.append("[");
-
-    //     for (Star star : connectedStars) {
-            
-    //         // System.out.print(star.getName() + ", ");
-    //         connectedStarsName.append(star.getName() + ", ");
-    //     }
-    //     connectedStarsName.append("]");
-    //     return connectedStarsName.toString();
-    // }
-
-    // private String connectedStarsName(ArrayList<Star> connectedStars) {
-    //     List<String> starNames = new ArrayList<>();
-
-    //     for (Star star : connectedStars) {
-    //         starNames.add(String.valueOf(star.getName()));
-    //     }
-
-    //     return "(" + String.join(", ", starNames) + ")";
-    // }
 
     private String connectedStarsName() {
 
@@ -344,8 +293,6 @@ public class Star {
 
         return Integer.parseInt(String.valueOf(temp) + String.valueOf(temp2) + String.valueOf(temp3)); //
     }
-
-
 }
 
    
