@@ -42,7 +42,7 @@ public class Knapsack {
         System.out.println("Total profit: " + result[0]);
         System.out.println("Total weight: " + result[1]);
 
-        saveResults("Knapsack.txt", knapsackTable, selectedStars, result[0], result[1], num_of_stars, stars_weight, stars_profit);
+        saveResults("Q4/Knapsack.csv", knapsackTable, selectedStars, result[0], result[1], num_of_stars, stars_weight, stars_profit);
     }
 
     public static int[] knapsack(ArrayList<Integer> weights, ArrayList<Integer> profits, ArrayList<Integer> stars, int maxCapacity, int[][] knapsackTable, ArrayList<Integer> selectedStars) {
@@ -92,34 +92,24 @@ public class Knapsack {
 
     public static void saveResults(String filename, int[][] knapsackTable, ArrayList<Integer> selectedStars, int totalProfit, int totalWeight, ArrayList<Integer> num_of_stars, ArrayList<Integer> stars_weight, ArrayList<Integer> stars_profit) {
         try (FileWriter writer = new FileWriter(filename)) {
+            
+            writer.write("item/W,");
+    
             // Write the header row (weights)
-            writer.write("+-------+");
             for (int j = 0; j < knapsackTable[0].length; j++) {
-                writer.write("----+");
-            }
-            writer.write("\n|Item/W |");
-            for (int j = 0; j < knapsackTable[0].length; j++) {
-                writer.write(String.format("%4d|", j));
-            }
-            writer.write("\n+-------+");
-            for (int j = 0; j < knapsackTable[0].length; j++) {
-                writer.write("----+");
+                writer.write(j + ",");
             }
             writer.write("\n");
-
+    
             // Write the table with items as rows
             for (int i = 0; i < knapsackTable.length; i++) {
                 if (i == 0) {
-                    writer.write("|   0   |"); // For the first row (no items)
+                    writer.write(0 + ","); // For the first row (no items)
                 } else {
-                    writer.write(String.format("| %5d |", num_of_stars.get(i - 1)));
+                    writer.write(num_of_stars.get(i - 1) + ",");
                 }
                 for (int j = 0; j < knapsackTable[i].length; j++) {
-                    writer.write(String.format("%4d|", knapsackTable[i][j]));
-                }
-                writer.write("\n+-------+");
-                for (int j = 0; j < knapsackTable[0].length; j++) {
-                    writer.write("----+");
+                    writer.write(knapsackTable[i][j] + ",");
                 }
                 writer.write("\n");
             }
@@ -131,8 +121,10 @@ public class Knapsack {
 
             writer.write("\nTotal profit: " + totalProfit + "\n");
             writer.write("Total weight: " + totalWeight + "\n");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
 }
