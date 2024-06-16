@@ -15,6 +15,8 @@ public class Star {
 
     public Star(Star[] myStars) throws IOException {
 
+        long startTime = System.currentTimeMillis();
+
         Star.setStarProperties(myStars); // Set All Star Properties x, y, z, weight & profit
 
         Star.cyclicConnect(myStars); //20 Edges Used
@@ -36,6 +38,9 @@ public class Star {
         outputConnectedStarsToCSV(myStars, "connected_stars.csv");
         writer.close();
 
+        long endTime = System.currentTimeMillis();
+        System.out.println("\nTime taken to Generate dataset: " + (endTime - startTime) + " ms");
+
         int totalWeight = 0;
 
         for (Star star : myStars) {
@@ -44,7 +49,7 @@ public class Star {
         }
 
         System.out.println("Total Weight: " + totalWeight);
-        System.out.println(Star.edgeCount);
+        // System.out.println(Star.edgeCount);
 
     }
 
@@ -122,13 +127,9 @@ public class Star {
     //     return "Star = " + name + ", connectedStar = [" + connectedStarsName() + "]";
     // }
 
-    public static void writeInFile() {
-
-
-    }
-
     public static void outputConnectedStarsToCSV(Star[] myStars, String filename) {
         try (FileWriter writer = new FileWriter(filename)) {
+
             writer.append("Star Name,Connected Star Name\n");
         
             for (int i = 0; i < myStars.length; i++) {
@@ -144,17 +145,6 @@ public class Star {
         }
     }
 
-   
-    public static void starDistance (Star a, Star b) {
-
-        double distance = Math.sqrt( (Math.pow(b.getX() - a.getX(), 2)) + (Math.pow(b.getY() - a.getY(), 2)) + (Math.pow(b.getZ() - a.getZ(), 2)) );
-    
-        System.out.println("From Distance function: " + distance);
-    
-        // return distance;    
-    }
-
-   
     public static int calculateDistance(double[] pos1, double[] pos2) {
         double distance = Math.sqrt(Math.pow(pos2[0] - pos1[0], 2) + Math.pow(pos2[1] - pos1[1], 2) + Math.pow(pos2[2] - pos1[2], 2));
         BigDecimal bd = new BigDecimal(distance);
@@ -278,8 +268,6 @@ public class Star {
         int temp = seedRef[Math.abs(random.nextInt()) % seedRef.length];
         int temp2 = seedRef[Math.abs(random.nextInt()) % seedRef.length];
 
-        // System.out.println("temp++ " + temp + temp2 );
-
         return Integer.parseInt(String.valueOf(temp) + String.valueOf(temp2));
     }
 
@@ -288,8 +276,6 @@ public class Star {
         int temp = seedRef[Math.abs(random.nextInt()) % seedRef.length];
         int temp2 = seedRef[Math.abs(random.nextInt()) % seedRef.length];
         int temp3 = seedRef[Math.abs(random.nextInt()) % seedRef.length];
-
-        // System.out.println("temp+++ " + temp + temp2 + temp3 );
 
         return Integer.parseInt(String.valueOf(temp) + String.valueOf(temp2) + String.valueOf(temp3)); //
     }
